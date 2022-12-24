@@ -1,70 +1,13 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-  constructor () {
-    super();
-    this.state = {
-      price: 999,
-      title: 'Mobile Phone',
-      qty: 1,
-      img: ''
-    }
-    // this.increaseQuantity = this.increaseQuantity.bind(this);
-    // this.testing();
-  }
-
-  // testing () {
-  //   const promise = new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve('done');
-  //     }, 5000);
-  //   })
-
-  //   promise.then(() => {
-  //     // setState acts like a synchronus call
-  //     this.setState({ qty: this.state.qty + 10 });
-
-  //     this.setState({ qty: this.state.qty + 10 });
-
-  //     this.setState({ qty: this.state.qty + 10 });
-
-  //     console.log('state', this.state);
-  //   });
-  // }
-  increaseQuantity = () => {
-    // this.state.qty += 1;
-    // console.log('this', this.state);
-    // setState form 1
-    // this.setState({
-    //   qty: this.state.qty + 1
-    // }, () => {});
-
-    // setState form 2 - if prevState required use this
-    this.setState((prevState) => {
-      return {
-        qty: prevState.qty + 1
-      }
-    });
-  }
-
-  decreaseQuantity = () => {
-    const { qty } = this.state;
-
-    if (qty === 0) {
-      return;
-    }
-    // setState form 2 - if prevState required use this
-    this.setState((prevState) => {
-      return {
-        qty: prevState.qty - 1
-      }
-    });
-  }
   render () {
-    console.log('render');
-    const { price, title, qty } = this.state;
+    console.log("this.props", this.props);
+    const { price, title, qty } = this.props.product;
+    
     return (
       <div className="cart-item">
+        {this.props.jsx}
         <div className="left-block">
           <img style={styles.image} alt="" />
         </div>
@@ -78,13 +21,13 @@ class CartItem extends React.Component {
               alt="increase"
               className="action-icons"
               src="https://www.pngmart.com/files/21/Add-Button-PNG-Transparent.png"
-              onClick={this.increaseQuantity}
+              onClick={() => this.props.onIncreaseQuantity(this.props.product)}
             />
             <img
               alt="decrease"
               className="action-icons"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk_QZe0oYEp6-QEsMGseYQ1X2vEaFb_SDz6zfh9Ar8et4-f6fgm4G6jivSlDDNZB2AfAk&usqp=CAU"
-              onClick={this.decreaseQuantity}
+              onClick={() => this.props.onDecreaseQuantity(this.props.product)}
             />
             <img
               alt="delete"
